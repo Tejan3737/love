@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Greeting App</title>
+
+  <style>
+    body {
+      background-color: rgb(231, 125, 224);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .out {
+      background-color: white;
+      padding: 20px;
+      width: 500px;
+      height: 300px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      text-align: center;
+      position: relative;
+      overflow: visible;
+    }
+
+    button {
+      border-radius: 14px;
+      background-color: rgb(226, 33, 204);
+      padding: 10px 20px;
+      border: none;
+      color: white;
+      cursor: pointer;
+      transition: all 0.35s ease;
+      white-space: nowrap;
+    }
+
+    #yes {
+      font-size: 16px;
+      z-index: 5;
+    }
+
+    /* FIXED FULLSCREEN YES */
+    .fullscreen {
+      position: absolute;
+      inset: 0;
+      border-radius: 0;
+      font-size: 64px !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 6;
+    }
+
+    /* GIF FIX */
+    img {
+      overflow: visible;
+      bottom: 10px;
+      right: 10px;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="out" id="card">
+    <h1 id="text">Yes I knew that, yayayyyy ❤️</h1>
+    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTBidmV1MTBhdmplb2VwNTYwZWhsa2V1M3J5aDBoZG9sdHUzbndheiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1JmGiBtqTuehfYxuy9/giphy.gif" alt="celebration gif" style="height: 200px; width: 200px">
+  </div>
+
+  <script>
+    function createFloatingHeart() {
+      const dil = document.createElement('div');
+      dil.innerHTML = '♥';
+      dil.style.position = 'fixed';
+      dil.style.color = 'red';
+      dil.style.fontSize = Math.random() * 20 + 15 + 'px';
+      dil.style.left = Math.random() * 100 + 'vw';
+      dil.style.top = '100vh';
+      dil.style.pointerEvents = 'none';
+      dil.style.zIndex = '9999';
+      document.body.appendChild(dil);
+
+      const animation = dil.animate([
+        { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+        { transform: `translateY(-${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+      ], {
+        duration: Math.random() * 3000 + 2000,
+        easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+      });
+
+      animation.onfinish = () => dil.remove(); // fixed cleanup
+    }
+
+    window.addEventListener('load', function() {
+      for (let i = 0; i < 10; i++) {
+        setTimeout(() => createFloatingHeart(), i * 300);
+      }
+    });
+  </script>
+</body>
+</html>
