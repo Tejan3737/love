@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Greeting App</title>
+
+  <style>
+    body {
+      background-color: rgb(231, 125, 224);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .out {
+      background-color: white;
+      overflow: visible;
+      padding: 20px;
+      width: 500px;
+      height: 300px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .in {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    button {
+      border-radius: 14px;
+      background-color: rgb(226, 33, 204);
+      padding: 10px 20px;
+      border: none;
+      color: white;
+      cursor: pointer;
+      transition: all 0.35s ease;
+      white-space: nowrap;
+    }
+
+    #yes {
+      font-size: 16px;
+      z-index: 5;
+    }
+
+    .fullscreen {
+      position: absolute;
+      inset: 0;
+      border-radius: 0;
+      font-size: 64px !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 6;
+    }
+    img {
+        overflow: visible;
+      bottom: 10px;
+      right: 10px;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="out" id="card">
+    <h1 id="text">Will you be my valentine? ❤️</h1>
+
+    <div class="in" id="buttons">
+      <button id="yes" onclick="goNext()">Yes</button>
+      <button id="no" onclick="growYes()">No</button>
+    </div>
+
+    <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWFhcWcwbG1yNHlybTRnM3RkcDQ4bmVub2diZXA1NXc2NmE1Z2VkbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/yc2pHdAoxVOrJ2m5Ha/giphy.gif" alt="sldfjlk" style="height: 200px; width: 200px">
+  </div>
+
+  <script>
+    let yesSize = 16;
+    let clicks = 0;
+    let fullscreen = false;
+
+    function growYes() {
+      const yes = document.getElementById("yes");
+      const no = document.getElementById("no");
+      const text = document.getElementById("text");
+
+      clicks++;
+      yesSize += 6;
+
+      yes.style.fontSize = yesSize + "px";
+      yes.style.padding = `${yesSize / 1.4}px ${yesSize}px`;
+
+      const texts = [
+        "Chal na kyu masti krri 😒",
+        "Bubu galat button h yeh 🥲",
+        "Jana dusra wala dabao 😏",
+        "Abhi nahi dabana 😤",
+        "Jaan k krri na 😭",
+        "Ab pakka ilaj krunga 😈"
+      ];
+
+      if (yesSize >= 60 && !fullscreen) {
+        fullscreen = true;
+        yes.classList.add("fullscreen");
+        yes.innerText = "YES ❤️";
+        text.style.display = "none";
+        no.style.display = "none";
+      } else {
+        no.innerText = texts[Math.min(clicks - 1, texts.length - 1)];
+      }
+    }
+
+    function goNext() {
+      window.location.href = "second.html";
+    }
+  </script>
+</body>
+</html>
